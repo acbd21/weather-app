@@ -11,9 +11,12 @@ const weather = ({ long, lat } = {}, callback) => {
     } else if (body.error) {
       callback(body.error.info);
     } else {
+      console.log(body.current)
+      console.log(body)
       callback(undefined, {
         temperature: body.current.temperature,
         feelslike: body.current.feelslike,
+        humidity: body.current.humidity
       });
     }
   });

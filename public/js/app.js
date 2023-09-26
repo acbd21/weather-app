@@ -9,14 +9,15 @@ weatherForm.addEventListener("submit", (event) => {
   messageTwo.textContent = "";
   messageOne.textContent = "Loading...";
 
-  fetch(`http://localhost:3000/weather?address=${address}`).then((response) => {
+  fetch(`/weather?address=${address}`).then((response) => {
     messageOne.textContent = "";
     response.json().then((data) => {
       if (data.error) {
         messageOne.textContent = data.error;
       } else {
-        messageOne.textContent = `Address: ${data.address.toUpperCase()}`;
-        messageTwo.textContent = `Temperature ${data.temperature} and feels like ${data.feelslike}`;
+        const {temperature, feelslike, humidity, address} = data;
+        messageOne.textContent = `Address: ${address.toUpperCase()}`;
+        messageTwo.textContent = `Temperature ${temperature}, feels like ${feelslike} and humidity is ${humidity}`;
       }
     });
   });
